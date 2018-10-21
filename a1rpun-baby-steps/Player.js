@@ -1,8 +1,8 @@
 class Player {
   constructor() {
-    this.direction = 'forward';
+    this.direction = 'backward';
     this.previousHealth = 100;
-    this.minHealth = 99;
+    this.minHealth = 80;
     this.criticalHealth = 30;
     this.fleeing = false;
     this.gotRested = false;
@@ -25,7 +25,11 @@ class Player {
       sense = warrior.feel(this.direction);
     }
 
-    if(gotDamaged && (health <= this.criticalHealth || gotRested) && !this.fleeing){
+    var space = warrior.look(this.direction).find(x => x.isUnit());
+
+    if (space && space.getUnit().isEnemy()){
+      warrior.shoot(this.direction);
+    } else if (gotDamaged && (health <= this.criticalHealth || gotRested) && !this.fleeing){
       this.fleeing = true;
       this.switchDirection();
       warrior.walk(this.direction);

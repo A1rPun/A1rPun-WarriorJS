@@ -2,21 +2,23 @@
 
 ### _For players new to WarriorJS_
 
-## Level 8
+## Level 9
 
-_You hear the mumbling of wizards. Beware of their deadly wands! Good thing you found a bow._
+_Time to hone your skills and apply all of the abilities that you've learned._
 
-> **TIP:** Use `warrior.look()` to determine your surroundings, and `warrior.shoot()` to fire an arrow.
+> **TIP:** Watch your back.
 
 ### Floor Map
 
 ```
-╔══════╗
-║@ Cww>║
-╚══════╝
+╔═══════════╗
+║>Ca  @ S wC║
+╚═══════════╝
 
-@ = A1rPun (20 HP)
 C = Captive (1 HP)
+a = Archer (7 HP)
+@ = A1rPun (20 HP)
+S = Thick Sludge (24 HP)
 w = Wizard (3 HP)
 > = stairs
 ```
