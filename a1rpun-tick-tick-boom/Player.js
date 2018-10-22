@@ -1,39 +1,46 @@
 class Player {
   constructor() {
     this.previousHealth = 100;
-    this.minHealth = 80;
-    this.criticalHealth = 30;
-    this.fleeing = false;
-    this.gotRested = false;
   }
 
   playTurn(warrior) {
     // Cool code goes here.
     var health = warrior.health() / warrior.maxHealth() * 100;
     var gotDamaged = health < this.previousHealth;
-    var gotRested = this.gotRested;
-    this.gotRested = false;
-    var sense = warrior.feel();
+    var senses = [
+      'backward',
+      'left',
+      'forward',
+      'right',
+    ];
 
-    if (gotDamaged && (health <= this.criticalHealth || gotRested) && !this.fleeing) {
-      this.fleeing = true;
-      warrior.walk(warrior.directionOfStairs());
-    } else if (sense.isEmpty()) {
-      if (!gotDamaged && health <= this.minHealth) {
-        warrior.rest();
-        this.gotRested = true;
-        this.fleeing = false;
-      } else {
-        warrior.walk(warrior.directionOfStairs());
-      }
-    } else {
-      var unit = sense.getUnit();
-      if (unit.isEnemy()) {
-        warrior.attack();
-      } else if (unit.isBound()) {
-        warrior.rescue();
-      }
+    var units = warrior.listen();
+var state = 'walk';
+var direction = warrior.directionOfStairs();
+for(let i = units.length;i--;){
+  var space = units[i];
+  var unit = space.getUnit();
+  var loc = space.getLocation();
+  var dir = warrior.directionOf(space);
+  var canInteract = (loc[0] === 0 && (loc[1] === -1 || loc[1] === 1))
+                    || (loc[1] === 0 && (loc[0] === -1 || loc[0] === 1));
+
+  if(unit.isUnderEffect('ticking')){
+    direction = dir;
+    if(canInteract){
+      state = 'rescue'
+      break;
     }
+  }
+}
+if(state === 'walk' && !warrior.feel(direction).isEmpty()){
+  direction = 'left';
+  if(!warrior.feel(direction).isEmpty()){
+    direction = 'forward';
+  }
+}
+warrior[state](direction);
+
     this.previousHealth = health;
   }
 }
