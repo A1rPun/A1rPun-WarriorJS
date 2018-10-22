@@ -1,0 +1,23 @@
+{
+  "name": "a1rpun-warriorjs",
+  "version": "0.0.1",
+  "description": "",
+  "main": "README.md",
+  "scripts": {
+    "warriorjs": "warriorjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/A1rPun/A1rPun-WarriorJS.git"
+  },
+  "author": "A1rPun",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/A1rPun/A1rPun-WarriorJS/issues"
+  },
+  "homepage": "https://github.com/A1rPun/A1rPun-WarriorJS#readme",
+  "dependencies": {
+    "@warriorjs/cli": "^0.14.0",
+    "@warriorjs/tower-tick-tick-boom": "^0.13.0"
+  }
+}
