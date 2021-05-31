@@ -1,6 +1,6 @@
 # A1rPun WarriorJS
 
-My games and towers in WarriorJS 
+My games and towers in [WarriorJS](https://warrior.js.org)
 
 ```
    .
@@ -43,6 +43,9 @@ My games and towers in WarriorJS
 ## Baby Steps
 
 ```
+Total Score: 616
+Your average grade for this tower is: A
+
 Level 1: S
 Level 2: A
 Level 3: S

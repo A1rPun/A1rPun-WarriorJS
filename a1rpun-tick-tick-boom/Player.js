@@ -1,3 +1,5 @@
+var abs = Math.abs;
+
 class Player {
     constructor() {
         this.finder = new AStar();
@@ -56,7 +58,7 @@ class Player {
                         grid[y][x] = 0;
 
             this.finder.setGrid(grid);
-            this.finder.setAcceptableTiles([0, 1]);
+            this.finder.setAcceptableTiles([0]);
             var path = this.finder.findPath([offsetX, offsetY], [destX, destY]);
             if (path.length > 1) {
                 let dir = '';
@@ -73,6 +75,10 @@ class Player {
                 space = warrior.feel(dir);
             } else {
                 space = null;
+                this.finder.setAcceptableTiles([0, 1, 2]);
+                var noLimitPath = this.finder.findPath([offsetX, offsetY], [destX, destY]);
+                // bind enemies around you except nolimitPath[1]
+                // attack nolimitPath[1]
             }
         }
 
@@ -80,8 +86,9 @@ class Player {
             var closest = Infinity;
             var closestIndex = -1;
             for (let i = units.length; i--;) {
-                let closestSum = units[i].getLocation().reduce((a, b) => a + b, 0);
+                let closestSum = units[i].getLocation().reduce((a, b) => abs(a) + abs(b), 0);
                 if (closestSum < closest || (closestSum === closest && units[closestIndex].getUnit().isBound())) {
+                    closest = closestSum;
                     closestIndex = i;
                 }
             }
@@ -108,8 +115,6 @@ class Player {
         warrior[state](direction);
     }
 }
-
-var abs = Math.abs;
 
 class AStar {
     constructor() {
